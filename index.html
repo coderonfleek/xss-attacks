@@ -57,27 +57,11 @@
     let submitButton = document.getElementById("submitButton");
     let infoDisplay = document.getElementById("infoDisplay");
 
-    /* const params = new URLSearchParams(window.location.search);
-
-    console.log(params.get('email'));
-
-    infoDisplay.innerHTML = params.get('email'); */
-
     submitButton.onclick = async function () {
-        //infoDisplay.innerHTML = email.value + "Login Successful"
-
         
-
         const response = await axios.post("/sendinfo", {email : email.value, password : password.value});
-
         console.log(response);
-
-        //window.location.href = `/?email=${response.data.email}`
-
-        //infoDisplay.textContent = response.data.email;
         infoDisplay.innerHTML = response.data.email;
-
-        //infoDisplay.append(email.value);
     }
 </script>
 </html>
