@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test:dev": "PATH=$PATH:./chromedriver jest",
-    "test": "jest"
+    "test": "PATH=$PATH:~/bin/chromedriver jest"
   },
   "keywords": [],
   "author": "",
