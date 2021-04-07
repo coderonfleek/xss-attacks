@@ -19,11 +19,13 @@ jobs:
       - run:
           name: Install Chrome Driver
           command: |
-            sudo npm install chromedriver
-      - run:
-          name: Start Chrome Driver
-          command: ./node_modules/chromedriver/lib/chromedriver/chromedriver
-          background: true
+            version=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE")
+            wget -qP /tmp/ "https://chromedriver.storage.googleapis.com/${version}/chromedriver_linux64.zip"
+            sudo unzip -o /tmp/chromedriver_linux64.zip -d /usr/bin
+      #- run:
+      #   name: Start Chrome Driver
+      #    command: ./node_modules/chromedriver/lib/chromedriver/chromedriver
+      #    background: true
       - run:
           name: Run tests
           command: npm run test
