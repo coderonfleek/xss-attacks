@@ -19,16 +19,11 @@ jobs:
       - run:
           name: Install Chrome Driver
           command: |
-            CHROME_VERSION="81.0.4044.138"
-            wget --no-verbose -O /tmp/chrome.deb https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_${CHROME_VERSION}_amd64.deb
-            apt install -y /tmp/chrome.deb
-            rm /tmp/chrome.deb
-            wget -qP /tmp/ "https://chromedriver.storage.googleapis.com/$CHROME_VERSION/chromedriver_linux64.zip"
-            sudo unzip -o /tmp/chromedriver_linux64.zip -d /usr/bin
-      #- run:
-      #   name: Start Chrome Driver
-      #    command: ./node_modules/chromedriver/lib/chromedriver/chromedriver
-      #    background: true
+            npm install chromedriver
+      - run:
+         name: Start Chrome Driver
+          command: ./node_modules/chromedriver/lib/chromedriver/chromedriver
+          background: true
       - run:
           name: Run tests
           command: npm run test
