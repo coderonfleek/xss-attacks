@@ -23,5 +23,10 @@ jobs:
           command: node server.js
           background: true
       - run:
+          name: Install Chrome Driver
+          command: |
+            sudo npm -g install chromedriver
+            ln -sf /usr/lib/node_modules/chromedriver/lib/chromedriver/chromedriver ~/bin/chromedriver
+      - run:
           name: Run tests
           command: npm run test
