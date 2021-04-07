@@ -21,7 +21,7 @@ jobs:
           command: |
             npm install chromedriver
       - run:
-         name: Start Chrome Driver
+          name: Start Chrome Driver
           command: ./node_modules/chromedriver/lib/chromedriver/chromedriver
           background: true
       - run:
