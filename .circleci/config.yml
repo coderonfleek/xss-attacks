@@ -27,9 +27,9 @@ jobs:
           command: |
             sudo npm install chromedriver
       - run:
-	        name: Start Chrome Driver
-	        command: ./node_modules/chromedriver/lib/chromedriver/chromedriver
-	        background: true
+          name: Start Chrome Driver
+          command: ./node_modules/chromedriver/lib/chromedriver/chromedriver
+          background: true
       - run:
           name: Run tests
           command: npm run test
