@@ -25,7 +25,7 @@ jobs:
       - run:
           name: Install Chrome Driver
           command: |
-            sudo npm -g install chromedriver
+            sudo npm install chromedriver
       - run:
           name: Run tests
           command: npm run test
