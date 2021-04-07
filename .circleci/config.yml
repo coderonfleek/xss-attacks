@@ -13,17 +13,25 @@ jobs:
           name: Install Dependencies
           command: npm install
       - run:
+          name: Update Chrome Driver
+          command: |
+            CHROME_VERSION=(google-chrome --version)
+            echo $CHROME_VERSION
+            webdriver-manager clean
+            webdriver-manager update --versions.chrome $CHROME_VERSION
+      - run:
           name: Run the application
           command: node server.js
           background: true
-      - run:
-          name: Install Chrome Driver
-          command: |
-            npm install chromedriver
-      - run:
-          name: Start Chrome Driver
-          command: ./node_modules/chromedriver/lib/chromedriver/chromedriver
-          background: true
+
+      #- run:
+      #    name: Install Chrome Driver
+      #    command: |
+      #      npm install chromedriver
+      #- run:
+      #    name: Start Chrome Driver
+      #    command: ./node_modules/chromedriver/lib/chromedriver/chromedriver
+      #    background: true
       - run:
           name: Run tests
           command: npm run test
