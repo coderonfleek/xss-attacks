@@ -23,5 +23,9 @@ jobs:
           command: node server.js
           background: true
       - run:
+          name: Install Chrome Driver
+          command: |
+            sudo npm -g install chromedriver
+      - run:
           name: Run tests
           command: npm run test
