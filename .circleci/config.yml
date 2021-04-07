@@ -15,6 +15,7 @@ jobs:
       - run:
           name: Update Chrome Driver
           command: |
+            sudo npm install -g webdriver-manager
             CHROME_VERSION=(google-chrome --version)
             echo $CHROME_VERSION
             webdriver-manager clean
