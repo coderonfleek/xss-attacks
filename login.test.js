@@ -16,6 +16,8 @@ test("Check for XSS attack on email field", async () => {
 
     expect(emailText.length).toBeGreaterThan(0);
 
+    
+
   } finally {
     await driver.quit();
   }
