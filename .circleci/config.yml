@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/repo
     docker:
-      - image: circleci/node:11-browsers
+      - image: circleci/node:11
     steps:
       - checkout
       - run:
@@ -15,11 +15,10 @@ jobs:
       - run:
           name: Update Chrome Driver
           command: |
-            sudo npm install -g webdriver-manager
-            CHROME_VERSION=(google-chrome --version)
-            echo $CHROME_VERSION
-            webdriver-manager clean
-            webdriver-manager update --versions.chrome $CHROME_VERSION
+            version=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE")
+            wget -qP /tmp/ "https://chromedriver.storage.googleapis.com/${version}/chromedriver_linux64.zip"
+            sudo unzip -o /tmp/chromedriver_linux64.zip -d /usr/bin
+            sudo apt-get --only-upgrade install google-chrome-stable
       - run:
           name: Run the application
           command: node server.js
