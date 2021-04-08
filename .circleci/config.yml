@@ -18,6 +18,11 @@ jobs:
             version=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE")
             wget -qP /tmp/ "https://chromedriver.storage.googleapis.com/${version}/chromedriver_linux64.zip"
             sudo unzip -o /tmp/chromedriver_linux64.zip -d /usr/bin
+      - run:
+          name: Install Chrome
+          command: |
+            sudo apt-get update
+            sudo apt-get install libgconf2-4 libnss3-1d libxss1
             sudo apt-get --only-upgrade install google-chrome-stable
       - run:
           name: Run the application
