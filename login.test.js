@@ -1,24 +1,28 @@
-const {Builder, By, Key, until} = require('selenium-webdriver');
+const puppeteer = require('puppeteer');
+
+let browser;
+
+beforeEach(async () => {
+  browser = await puppeteer.launch();
+});
+
+afterEach(async () => {
+  await browser.close();
+});
 
 test("Check for XSS attack on email field", async () => {
-  let driver = await new Builder().forBrowser('chrome').build();
-  try {
-    await driver.get('http://localhost:5000');
-    await driver.findElement(By.id('userEmail')).sendKeys('<input type="file" />');
-    await driver.findElement(By.id('userPassword')).sendKeys('fikayo');
+  const page = await browser.newPage();
+  
+  await page.goto('http://localhost:5000');
 
-    
+  await page.type('#userEmail', '<input type="file" />');
+  await page.type('#userPassword', 'password');
+  await page.click('#submitButton');
 
-    //Submit
-    await driver.findElement(By.id('submitButton')).click();
-
-    const emailText = await driver.findElement(By.id('infoDisplay')).getText();
-
-    expect(emailText.length).toBeGreaterThan(0);
-
-  } finally {
-    await driver.quit();
-  }
+  let emailContainer = await page.$('#infoDisplay')
+  let value = await emailContainer.evaluate(el => el.textContent);
+  
+  expect(value.length).toBeGreaterThan(0);
   
 }, 120000);
 

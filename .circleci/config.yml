@@ -9,34 +9,15 @@ jobs:
       - run:
           name: Update NPM
           command: "sudo npm install -g npm"
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package-lock.json" }}
       - run:
           name: Install Dependencies
           command: npm install
-      - run:
-          name: Update Chrome Driver
-          command: |
-            version=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE")
-            wget -qP /tmp/ "https://chromedriver.storage.googleapis.com/${version}/chromedriver_linux64.zip"
-            sudo unzip -o /tmp/chromedriver_linux64.zip -d /usr/bin
-      - run:
-          name: Install Chrome
-          command: |
-            wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-            sudo dpkg -i google-chrome-stable_current_amd64.deb
-            sudo apt -f install
-      - run:
-          name: Run the application
-          command: node server.js
-          background: true
-
-      #- run:
-      #    name: Install Chrome Driver
-      #    command: |
-      #      npm install chromedriver
-      #- run:
-      #    name: Start Chrome Driver
-      #    command: ./node_modules/chromedriver/lib/chromedriver/chromedriver
-      #    background: true
+      - save_cache:
+          key: dependency-cache-{{ checksum "package-lock.json" }}
+          paths:
+            - ./node_modules
       - run:
           name: Run tests
           command: npm run test
