@@ -4,7 +4,7 @@ test("Check for XSS attack on email field", async () => {
   let driver = await new Builder().forBrowser('chrome').build();
   try {
     await driver.get('http://localhost:5000');
-    await driver.findElement(By.id('userEmail')).sendKeys('<input type="file" />');
+    await driver.findElement(By.id('userEmail')).sendKeys('fik4christ@yahoo.com');
     await driver.findElement(By.id('userPassword')).sendKeys('fikayo');
 
     
@@ -14,8 +14,8 @@ test("Check for XSS attack on email field", async () => {
 
     const emailText = await driver.findElement(By.id('infoDisplay')).getText();
 
-    expect(emailText.length).toBeGreaterThan(0);
-
+    //expect(emailText.length).toBeGreaterThan(0);
+    expect(emailText.length).toBe(20);
     
 
   } finally {
