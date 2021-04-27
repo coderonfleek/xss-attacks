@@ -3,10 +3,10 @@ jobs:
   build:
     working_directory: ~/repo
     docker:
-      - image: circleci/node-jessie-browsers
-        auth:
-          username: fikitout
-          password: Unlimitagbero@007
+      - image: circleci/node:11-browsers
+        #auth:
+        #username: fikitout
+        #password: Unlimitagbero@007
     steps:
       - checkout
       - run:
