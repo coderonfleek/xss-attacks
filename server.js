@@ -15,11 +15,19 @@ app.get("/", (req, res) => {
 
 app.post("/sendinfo", (req, res) => {
 
-    const email = req.body.email;
+    let email = req.body.email;
+
+    if (!valieEmail(email)) {
+        email = "Enter a Valid Email e.g test@company.com";
+    }
     
-    res.send({email});
+    res.send({ email });
 });
 
+function valieEmail(main) {
+    return 
+        /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(mail);
+    }
 
 app.listen(port, () => {
     console.log(`App Running at http://localhost:${port}`);
